@@ -276,7 +276,7 @@ document.addEventListener('DOMContentLoaded', () => {
         data.outcomes = formData.getAll('outcomes');
 
         // IMPORTANT: Replace this URL with the Google Apps Script Web App URL after deployment
-        const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwrNiahmBX8rvXu3vDkHu-InOeXyaQGiVgAiDUvg1BMdKJc8SqT8ZbF8ftwy4Jm-G3zZQ/exec";
+        const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzUtsqL3wpcdh1HTymblZYN1TZFysFa_KYvDZPVNIbvc9olW0uib3rkxii8YGlgI0ewBQ/exec";
 
         if (WEB_APP_URL === "YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE") {
             // For demo purposes, we'll just show success if URL isn't configured yet
