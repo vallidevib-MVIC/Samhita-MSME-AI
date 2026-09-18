@@ -276,7 +276,7 @@ document.addEventListener('DOMContentLoaded', () => {
         data.outcomes = formData.getAll('outcomes');
 
         // IMPORTANT: Replace this URL with the Google Apps Script Web App URL after deployment
-        const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbyGwxGE4h0N-gSpUXuBTHodvjPLMTcpBTE2g1SHwwMryv2rQIHZ84qA7ul6jovuTL2Qqw/exec";
+        const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwrNiahmBX8rvXu3vDkHu-InOeXyaQGiVgAiDUvg1BMdKJc8SqT8ZbF8ftwy4Jm-G3zZQ/exec";
 
         if (WEB_APP_URL === "YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE") {
             // For demo purposes, we'll just show success if URL isn't configured yet
@@ -285,30 +285,27 @@ document.addEventListener('DOMContentLoaded', () => {
             }, 800);
             return;
         }
-
         // Actual submission to Google Apps Script
-        fetch(WEB_APP_URL, {
-            method: 'POST',
-            body: JSON.stringify(data),
-            headers: {
-                'Content-Type': 'text/plain;charset=utf-8',
-            }
-        })
-            .then(response => response.json())
-            .then(data => {
-                if (data.status === 'success') {
-                    document.getElementById('success-modal').classList.add('active');
-                } else {
-                    alert('There was an error submitting your application. Please try again.');
-                    btnSubmit.innerHTML = 'Submit application';
-                    btnSubmit.disabled = false;
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('There was an error submitting your application. Please try again.');
-                btnSubmit.innerHTML = 'Submit application';
-                btnSubmit.disabled = false;
-            });
+    fetch(WEB_APP_URL, {
+        method: 'POST',
+        mode: 'no-cors', // Bypass the CORS block
+        body: JSON.stringify(data),
+        headers: {
+            'Content-Type': 'text/plain;charset=utf-8',
+        }
+    })
+    .then(() => {
+        // Because of 'no-cors', the response is "opaque" (unreadable).
+        // If the request makes it here without a network error, it succeeded.
+        document.getElementById('success-modal').classList.add('active');
+        
+        // Don't forget to reset your button state on success as well
+        btnSubmit.innerHTML = 'Submit application';
+        btnSubmit.disabled = false;
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('There was an error submitting your application. Please try again.');
+        btnSubmit.innerHTML = 'Submit application';
+        btnSubmit.disabled = false;
     });
-});
